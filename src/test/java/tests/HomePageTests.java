@@ -32,4 +32,24 @@ public class HomePageTests extends TestBase{
         Assert.assertEquals(Driver.getDriver().findElement( By.id("headPrimary4")).getText(), navFlightSTATUS);
 
     }
+
+    @Test
+    public void flightForm(){
+
+        Assert.assertEquals(Driver.getDriver().findElement(By.id("fromAirportName")).findElement(By.className("airport-code")).getText(), "From");
+        Assert.assertEquals(Driver.getDriver().findElement(By.id("toAirportName")).findElement(By.className("airport-code")).getText(), "To");
+
+
+    }
+
+    @Test
+    public void loginForm(){
+        Driver.getDriver().findElement( By.id("login-modal-button")).click();
+        Assert.assertNotNull(Driver.getDriver().findElement(By.id("login-content-body")));
+        Assert.assertNotNull(Driver.getDriver().findElement(By.id("userId")));
+        Assert.assertNotNull(Driver.getDriver().findElement(By.id("password")));
+
+
+    }
+
 }
