@@ -1,25 +1,34 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.FlightsPage;
 import utils.Driver;
 
 public class SearchFlightsTests extends TestBase{
 
-    @Test
-    public void testFlightFrom(){
+    @Test (dataProvider = "airportDataProvider")
+    public void testFlightFrom(String airportCode){
         FlightsPage flightsPage = new FlightsPage();
-        flightsPage.findFlightsFrom("BWI");
-        Assert.assertEquals(flightsPage.getFromButton().getText(), "BWI");
+        flightsPage.findFlightsFrom(airportCode);
+        Assert.assertEquals(flightsPage.getFromButton().getText(), airportCode);
     }
-    @Test
-    public void testFlightTo(){
+    @Test (dataProvider = "airportDataProvider")
+    public void testFlightTo(String airportCode){
         FlightsPage flightsPage = new FlightsPage();
-        flightsPage.findFlightsTo("CDG");
-        Assert.assertEquals(flightsPage.getToButton().getText(), "CDG");
+        flightsPage.findFlightsTo(airportCode);
+        Assert.assertEquals(flightsPage.getToButton().getText(), airportCode);
     }
-    @Test
+    @DataProvider
+    public Object[][] airportDataProvider() {
+        return new Object[][]{
+                {"IAD"},
+                {"LAX"},
+                {"CGD"}
+        };
+    }
+    @Test (priority = 1, groups = {"smoke"})
     public void testRoundTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeRound();
@@ -27,14 +36,14 @@ public class SearchFlightsTests extends TestBase{
         Assert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
         Assert.assertEquals(flightsPage.getDatesSelectorReturn().getText(), "Return");
     }
-    @Test
+    @Test (priority = 2, groups = {"smoke"})
     public void testOneWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeOneWay();
         Assert.assertEquals(flightsPage.getSelectedTripType().getText(), "One Way");
         Assert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
     }
-    @Test
+    @Test (priority =3, groups = {"smoke"})
     public void testMultiWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeMultiCity();
