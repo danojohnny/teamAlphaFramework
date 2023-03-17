@@ -29,6 +29,7 @@ public class TestBase {
     @AfterMethod
     public void tearDownMethod(){
 
+
         //Driver.quitDriver();
     }
 
