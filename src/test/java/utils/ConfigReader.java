@@ -1,12 +1,14 @@
 package utils;
 
+import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
 
 public class ConfigReader {
-
+    
     private static final Properties properties;
 
     static{
