@@ -33,6 +33,7 @@ public class VacationDealsTests extends TestBase {
     @Test(dataProvider = "airportDataProvider")
     public void testToButton(String airportcode) {
         VacationPage vacationPage = new VacationPage();
+        vacationPage.clickVacationTab();
         vacationPage.findDestinationTo(airportcode);
         Assert.assertEquals(vacationPage.getToButton().getText(), airportcode);
     }
@@ -47,10 +48,10 @@ public class VacationDealsTests extends TestBase {
     public Object[][] airportDataProvider() {
         return new Object[][]{
                 {"BWI"},
-                //  {"MIA"},
-                //  {"BOS"},
-                //{"IAD"},
-                // {"AUA"}
+                {"MIA"},
+                {"BOS"},
+                {"IAD"},
+                 {"AUA"}
 
         };
     }
