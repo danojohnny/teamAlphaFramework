@@ -17,7 +17,6 @@ import java.util.Properties;
 
 public class TestBase {
 
-
     @BeforeMethod
     public void setUpEachMethod() throws IOException {
 
