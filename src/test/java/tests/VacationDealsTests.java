@@ -20,6 +20,7 @@ public class VacationDealsTests extends TestBase {
     @Test(dataProvider = "airportDataProvider")
     public void testFromButton(String airportcode) {
         VacationPage vacationPage = new VacationPage();
+        vacationPage.clickVacationTab();
         vacationPage.findVacationFrom(airportcode);
         Assert.assertEquals(vacationPage.getFromButton().getText(), airportcode);
     }
@@ -33,6 +34,7 @@ public class VacationDealsTests extends TestBase {
     @Test(dataProvider = "airportDataProvider")
     public void testToButton(String airportcode) {
         VacationPage vacationPage = new VacationPage();
+        vacationPage.clickVacationTab();
         vacationPage.findDestinationTo(airportcode);
         Assert.assertEquals(vacationPage.getToButton().getText(), airportcode);
     }

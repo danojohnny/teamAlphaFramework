@@ -3,6 +3,7 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.FlightsPage;
 import utils.Driver;
 
@@ -32,24 +33,30 @@ public class SearchFlightsTests extends TestBase{
     public void testRoundTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeRound();
-        Assert.assertEquals(flightsPage.getSelectedTripType().getText(), "Round Trip");
-        Assert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
-        Assert.assertEquals(flightsPage.getDatesSelectorReturn().getText(), "Return");
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertEquals(flightsPage.getSelectedTripType().getText(), "Round Trip");
+        softAssert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
+        softAssert.assertEquals(flightsPage.getDatesSelectorReturn().getText(), "Return");
+        softAssert.assertAll();
     }
     @Test (priority = 2, groups = {"smoke"})
     public void testOneWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeOneWay();
-        Assert.assertEquals(flightsPage.getSelectedTripType().getText(), "One Way");
-        Assert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertEquals(flightsPage.getSelectedTripType().getText(), "One Way");
+        softAssert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
+        softAssert.assertAll();
     }
     @Test (priority =3, groups = {"smoke"})
     public void testMultiWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeMultiCity();
-        Assert.assertEquals(flightsPage.getSelectedTripType().getText(), "Multi-City");
-        Assert.assertEquals(flightsPage.getMultiCityFlight1().getText(), "FLIGHT 1");
-        Assert.assertEquals(flightsPage.getMultiCityFlight2().getText(), "FLIGHT 2");
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertEquals(flightsPage.getSelectedTripType().getText(), "Multi-City");
+        softAssert.assertEquals(flightsPage.getMultiCityFlight1().getText(), "FLIGHT 1");
+        softAssert.assertEquals(flightsPage.getMultiCityFlight2().getText(), "FLIGHT 2");
+        softAssert.assertAll();
     }
     }
 
