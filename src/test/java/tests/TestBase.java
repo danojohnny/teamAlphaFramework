@@ -25,39 +25,51 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class TestBase {
-    protected static ExtentReports extentReport;
-    protected static ExtentSparkReporter htmlReport;
-    protected static ExtentTest logger;
-    public TestBase() {
-    }
+
+    protected static ExtentReports extentReport; // manages the report generation
+    protected static ExtentSparkReporter htmlReport; // generates the html report
+    protected static ExtentTest logger; // manages the individual test steps and logs
 
     @BeforeSuite (alwaysRun = true)
     public void setupReport() {
+
         extentReport = new ExtentReports();
         String path = System.getProperty("user.dir") + "/target/extentReports/report.html";
         System.out.println(path);
-        htmlReport = new ExtentSparkReporter(path);
-        extentReport.attachReporter(new ExtentObserver[]{htmlReport});
+        htmlReport =  new ExtentSparkReporter(path);
+        extentReport.attachReporter(htmlReport);
+
+        extentReport.setSystemInfo("Name", "Delta airlines Automated Tests");
+        //extentReport.setSystemInfo("SDET", "Nino Todua");
+        extentReport.setSystemInfo("Environment", ConfigReader.getProperty("env"));
+        extentReport.setSystemInfo("Browser", ConfigReader.getProperty("browser"));
+        extentReport.setSystemInfo("OS", System.getProperty("os.name"));
+        extentReport.setSystemInfo("URL", ConfigReader.getProperty("homepage"));
+
+
     }
+
     @BeforeMethod (alwaysRun = true)
-    public void setUpEachMethod(Method method) throws IOException {
+    public void setUpEachMethod(Method method)  {
 
         Driver.getDriver().manage().window().maximize();
-        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Driver.getDriver().get(ConfigReader.getProperty("homepage"));
         logger = extentReport.createTest(method.getName());
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDownMethod(ITestResult testResult) {
-        if (testResult.getStatus() == 1) {
+
+    @AfterMethod (alwaysRun = true)
+    public void tearDownMethod(ITestResult testResult){ //ITestResult is a listener interface that stores the information about the test result
+
+        if(testResult.getStatus() == ITestResult.SUCCESS){
             logger.pass("TEST PASSED.");
-        } else if (testResult.getStatus() == 2) {
+        } else if (testResult.getStatus() == ITestResult.FAILURE) {
             logger.fail("TEST FAILED.");
             logger.fail(testResult.getThrowable());
             String path = SeleniumUtils.getScreenshot("failed");
             logger.addScreenCaptureFromPath(path);
-        } else {
+        }else{
             logger.skip("TEST SKIPPED.");
         }
 
@@ -65,7 +77,10 @@ public class TestBase {
     }
 
     @AfterSuite (alwaysRun = true)
-    public void tearDownReport() {
+    public void tearDownReport(){
+
         extentReport.flush();
     }
+
+
 }

@@ -45,7 +45,7 @@ public class VacationDealsTests extends TestBase {
         vacationPage.clickVacationTab();
     }
 
-    @DataProvider
+    @DataProvider (name = "airportDataProvider", parallel = true)
     public Object[][] airportDataProvider() {
         return new Object[][]{
                 {"BWI"},

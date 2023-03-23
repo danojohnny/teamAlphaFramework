@@ -21,7 +21,7 @@ public class SearchFlightsTests extends TestBase{
         flightsPage.findFlightsTo(airportCode);
         Assert.assertEquals(flightsPage.getToButton().getText(), airportCode);
     }
-    @DataProvider
+    @DataProvider (name = "airportDataProvider", parallel = true)
     public Object[][] airportDataProvider() {
         return new Object[][]{
                 {"IAD"},
@@ -29,7 +29,7 @@ public class SearchFlightsTests extends TestBase{
                 {"CGD"}
         };
     }
-    @Test (priority = 1, groups = {"smoke"})
+    @Test (priority = 1)
     public void testRoundTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeRound();
@@ -39,7 +39,7 @@ public class SearchFlightsTests extends TestBase{
         softAssert.assertEquals(flightsPage.getDatesSelectorReturn().getText(), "Return");
         softAssert.assertAll();
     }
-    @Test (priority = 2, groups = {"smoke"})
+    @Test (priority = 2)
     public void testOneWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeOneWay();
@@ -48,7 +48,7 @@ public class SearchFlightsTests extends TestBase{
         softAssert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
         softAssert.assertAll();
     }
-    @Test (priority =3, groups = {"smoke"})
+    @Test (priority =3)
     public void testMultiWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeMultiCity();
