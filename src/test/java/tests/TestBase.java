@@ -31,7 +31,7 @@ public class TestBase {
     public TestBase() {
     }
 
-    @BeforeSuite
+    @BeforeSuite (alwaysRun = true)
     public void setupReport() {
         extentReport = new ExtentReports();
         String path = System.getProperty("user.dir") + "/target/extentReports/report.html";
@@ -48,10 +48,7 @@ public class TestBase {
         logger = extentReport.createTest(method.getName());
     }
 
-    @AfterMethod
-            (
-                    alwaysRun = true
-            )
+    @AfterMethod(alwaysRun = true)
     public void tearDownMethod(ITestResult testResult) {
         if (testResult.getStatus() == 1) {
             logger.pass("TEST PASSED.");
@@ -67,7 +64,7 @@ public class TestBase {
         Driver.quitDriver();
     }
 
-    @AfterSuite
+    @AfterSuite (alwaysRun = true)
     public void tearDownReport() {
         extentReport.flush();
     }
