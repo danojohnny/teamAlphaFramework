@@ -61,7 +61,7 @@ public class TestBase {
             logger.skip("TEST SKIPPED.");
         }
 
-        Driver.quitDriver();
+     //  Driver.quitDriver();
     }
 
     @AfterSuite (alwaysRun = true)

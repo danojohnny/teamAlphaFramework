@@ -1,9 +1,11 @@
 package pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.Driver;
+import utils.SeleniumUtils;
 
 public class VacationPage {
 
@@ -13,82 +15,121 @@ public class VacationPage {
 
     }
 
-    @FindBy(xpath="//*[@id='tab_vacations']/a/div/p")
+    @FindBy(xpath = "/html/body/app-root/app-home/ngc-global-nav/header/div/nav/div/div[2]/ngc-search/div")
+    private WebElement topSearchButton;
+
+    @FindBy(xpath = "//div[@class='input-group']")
+    private WebElement searchForTopic;
+
+    @FindBy(xpath= "/html/body/modal-container/div/div/ngc-flyout-search/div/div/div/div/div[2]/div[3]/ul/li[1]/a")
+    private WebElement dropDownFirst;
+    @FindBy(xpath = "//span[contains(text(), 'Vacation Deals')]")
     private WebElement vacationDeals;
-    @FindBy(xpath = "//*[text()='From']")
-    private WebElement fromButton;
 
-    @FindBy(xpath = "//*[text()='To'][@class='title airportcode']")
-    private WebElement toButton;
+    @FindBy(xpath = "//*[@id=\"main_content\"]/idp-site-search/idp-site-search-page/div/div[3]/div/idp-search-result[1]/div/div[3]/a[1]")
+    private WebElement deltaVacationsPage;
 
-    @FindBy(xpath = "//input[@class='ancillary-widget_dropdown-search ancillary-widget_dropdown-vacations-origin-search']")
-    private WebElement airportSearchInputFrom;
+    @FindBy(xpath = "//*[@id=\"mat-tab-label-0-0\"]/div/div")
+    private WebElement flightHotelCars;
 
-    @FindBy(xpath = "//input[@class='ancillary-widget_dropdown-search ancillary-widget_dropdown-vacations-dest-search']")
-    private WebElement airportSearchInputTo;
+    @FindBy(xpath = "//*[@id=\"mat-tab-label-0-1\"]/div/div")
+    private WebElement flightCar;
 
-    @FindBy(xpath = "//div[@class='ancillary-widget_dropdown-item']//span[1]")
-    private WebElement dropdownFirstSelectionFrom;
+    @FindBy(xpath = "//*[@id=\"mat-tab-label-0-2\"]/div/div")
+    private WebElement hotelCar;
 
-    @FindBy(xpath = "/html/body/app-root/app-home/ngc-global-nav/header/div/div[1]/ngc-book/div[5]/div/div/div[1]/div[1]/div[3]/div/div/span")
-    private WebElement dropdownFirstSelectionTo;
+    @FindBy(xpath = "//*[@id=\"mat-tab-label-0-3\"]/div/div")
+    private WebElement destinationWeddings;
 
-    @FindBy(xpath = "//input[@class='ancillary-widget_dropdown-vacations-from ancillary-widget_date']")
-    private WebElement datesSelectorDepart;
+    @FindBy(xpath = "//*[@id=\"mat-tab-label-0-4\"]/div/div")
+    private WebElement honeymoons;
 
-    @FindBy(xpath = "//input[@class='ancillary-widget_dropdown-vacations-to ancillary-widget_date hide-text']")
-    private WebElement datesSelectorReturn;
+    @FindBy(xpath = "//input[@id='fromAirport']")
+    private WebElement OriginAirport;
 
-    @FindBy(xpath ="//select[@class='ancillary-widget_dropdown-vacations-rooms']")
-    private WebElement roomSelectorReturn;
+    @FindBy(xpath = "//label[@name='Destination']")
+    private WebElement destinationAirport;
+
+    @FindBy(xpath = "//label[@id='DepartureLabel']")
+    private WebElement departureDate;
+
+    @FindBy(xpath = "//label[@id='returnLabel']")
+    private WebElement returnDate;
+
+    @FindBy(xpath = "//input[@name='travelersAdultsDisplayField']")
+    private WebElement passenger;
+
+    @FindBy(xpath = "//input[@id='promoCode']")
+    private WebElement promoCode;
+
+    @FindBy(xpath = "//button[@id='vacationsSubmitButton']")
+    private WebElement searchButton;
 
 
+    public void topSearch() {
+        topSearchButton.click();
+    }
+
+    public void searchForTopic() {
+        searchForTopic.sendKeys("Vacation Deals");
+        dropDownFirst.click();
+    }
+
+    public void clickDeltaVacation(){
+        deltaVacationsPage.click();
+    }
+
+    public void scrollPageDown() {
+        SeleniumUtils.jsClick(vacationDeals);
+    }
 
     public void clickVacationTab() {
         vacationDeals.click();
     }
-    public void findVacationFrom(String from) {
 
-        fromButton.click();
-        airportSearchInputFrom.sendKeys(from);
-        dropdownFirstSelectionFrom.click();
+    public void clickFHC() {
+        flightHotelCars.click();
+    }
 
-        }
+    public void fightCar() {
+        flightCar.click();
+    }
 
-    public void findDestinationTo(String to) {
-        toButton.click();
-        airportSearchInputTo.sendKeys(to);
-        dropdownFirstSelectionTo.click();
+    public void clickHotelCar() {
+        hotelCar.click();
+    }
+
+    public void clickWeddings() {
+        destinationWeddings.click();
+    }
+
+    public void clickHoneymoons() {
+        honeymoons.click();
     }
 
 
-    public WebElement getFromButton() {
-        return fromButton;
-    }
-    public WebElement getToButton(){
-        return toButton;
+    public WebElement getSearchForTopic() {
+        return getSearchForTopic();
     }
 
-    private WebElement getAirportSearchInputFrom(){
-        return airportSearchInputFrom;
+    private WebElement getOriginAirport() {
+        return OriginAirport;
     }
 
-    private WebElement getAirportSearchInputTo(){
-        return airportSearchInputTo;
+    private WebElement getDestinationAirport() {
+        return destinationAirport;
     }
 
-    private WebElement getDatesSelectorDepart(){
-        return datesSelectorDepart;
+    private WebElement getDepartureDate() {
+        return departureDate;
     }
 
-    public WebElement getDatesSelectorReturn(){
-      return datesSelectorReturn;
+    public WebElement getReturnDate() {
+        return returnDate;
     }
-
-    private WebElement getRoomSelectorReturn(){
-        return roomSelectorReturn;
-    }
-
 
 }
-// First commit to check if my branch wokrs well
+
+
+
+
