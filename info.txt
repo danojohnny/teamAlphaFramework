@@ -1,4 +1,4 @@
-TDD(Test Driven Development) Framework - TestNG based framework
+TDD(Test Driven Development) Framework - TestNG or JUnit based framework that uses @Test annotations to create tests
 
 Steps of creating TestNG based framework from scratch:
 
@@ -11,4 +11,67 @@ Steps of creating TestNG based framework from scratch:
 7. Add .properties file with project specific global properties like urls, username, passwords ,etc.
    (never hardcode properties like urls, passwords, api keys into the code, rather use properties file)
 8. Add the utility class to read from the property file (ConfigReader)
-9. Add a utility class Driver that is implemented using Singleton design pattern
+9. Add the Driver utility class that is implemented using Singleton design pattern
+10. Start creating the Page classes for each page of the application and add the WebElements and related methods
+11. Create test cases using the Page classes and their methods
+12. Add Selenium Utility class for re-usable selenium methods and add more methods as needed as you progress in your progress
+
+
+Page Object Model - a design pattern that simplifies writing UI tests by creating a separate Page Classes where the elements of the page and actions on those webelements are stored.
+We usually use Page Object Model along with Page Factory where we use @FindBy annotations and a constructor with factory method PageFactory.initElements() method.
+
+Singleton Design Pattern -> A design pattern where an instantiation of a class is restricted to only one object.
+                           An example could be the Driver class where the Webdriver instantiation is done by getDriver() method that checks if the the WebDriver obj is already initialized.
+                           The purpose of using this pattern is to prevent multiple WebDriver objects being initialized.
+
+Page Object Model Design Pattern -> A design pattern specific to Selenium based test frameworks which is implemented by creating a separate class for each page of our
+                                    application which stores the page web elements and methods.
+                                    The purpose is re-usability, maintainability and readability.
+PageFactory design pattern ->      This pattern uses @FindBy annotations to locate the elements and makes our Page classes more readable and concise.
+                                   We implement it by using PageFactory.initElements() method in a constructor of the page class
+                                   We also can use @FindBys to create chained matches and @FindAll to match multiple webelements on the page
+
+
+To run tests thru CMD in TestNG framework:
+
+1. Add Maven Surefire plugin to the pom.xml
+2. Configure it to run different xml files.
+   Add the following configuration:
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>${xmlFile}</suiteXmlFile>   // syntax for the name of the placeholder -> ${placeholderName}
+                        </suiteXmlFiles>
+                    </configuration>
+                </plugin>
+
+3. In the command line run the tests with the -D switch, indicating the value for placeholder:
+         mvn test -D xmlFile=regression-suite.xml
+   or    mvn test -D xmlFile=smoke-test-suite.xml
+
+
+
+   Cross-browser testing       ->    We implement it in our framework by passing the browser type through command line like: mvn test -D browser=chrome
+                                     And we simply execute multiple commands for different browser types
+                                     We can use batch file/shell script file to execute all commands at once
+
+
+  Parallel Tests - running groups of tests in parallel to reduce execution time and get faster feedback
+                     How to implement:
+                     1. Setup Selenium Grid with Hub and multiple nodes and direct your tests to the central Hub which automatically distributes
+                        the tests among nodes.
+                        Pros: More scalable, reliable, little maintenance after initial setup.
+                        Cons: Complex to setup, can be more costly than native setup, especially when using third party cloud services
+                               such as SauceLabs, BrowserStack.
+                     2. Setup natively through TestNG xml file.
+                        a)Add parallel attribute to <suite> tag along with thread-count attribute where you indicate the amount of threads
+                        Default thread-count is 5 if not given.
+                        Parallel attribute can take methods, classes and tests.
+                        2)Adjust the singleton Driver class with ThreadLocal<WebDriver> to give each thread its own WebDriver
+    Re-run failed
+    tests          -  Let's say you have 800 tests in your regression suite and 10 of them failed. How to re-run those 10 without running all of them again?
+                      TestNG automatically generates testng-failed.xml file in surefire-reports folder, I locate and run that file.
+

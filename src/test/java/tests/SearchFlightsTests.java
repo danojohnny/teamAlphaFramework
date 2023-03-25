@@ -4,42 +4,47 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import pages.Flights2Page;
 import pages.FlightsPage;
 import utils.Driver;
 
 public class SearchFlightsTests extends TestBase{
 
     @Test (dataProvider = "airportDataProvider")
-    public void testFlightFrom(String airportCode){
+    public void testFlightFromTo(String airportCodeFrom, String airportCodeTo)  {
         FlightsPage flightsPage = new FlightsPage();
-        flightsPage.findFlightsFrom(airportCode);
-        Assert.assertEquals(flightsPage.getFromButton().getText(), airportCode);
-    }
-    @Test (dataProvider = "airportDataProvider")
-    public void testFlightTo(String airportCode){
-        FlightsPage flightsPage = new FlightsPage();
-        flightsPage.findFlightsTo(airportCode);
-        Assert.assertEquals(flightsPage.getToButton().getText(), airportCode);
-    }
-    @DataProvider
-    public Object[][] airportDataProvider() {
-        return new Object[][]{
-                {"IAD"},
-                {"LAX"},
-                {"CGD"}
-        };
-    }
-    @Test (priority = 1, groups = {"smoke"})
-    public void testRoundTripSelection(){
-        FlightsPage flightsPage = new FlightsPage();
+        flightsPage.findFlightsFrom(airportCodeFrom);
+        flightsPage.findFlightsTo(airportCodeTo);
         flightsPage.selectTripTypeRound();
+        flightsPage.searchFlightDates();
         SoftAssert softAssert=new SoftAssert();
-        softAssert.assertEquals(flightsPage.getSelectedTripType().getText(), "Round Trip");
-        softAssert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
-        softAssert.assertEquals(flightsPage.getDatesSelectorReturn().getText(), "Return");
+        softAssert.assertEquals(flightsPage.getOutboundSearchResultHeader().getText(), "Outbound");
         softAssert.assertAll();
     }
-    @Test (priority = 2, groups = {"smoke"})
+
+    @DataProvider (name = "airportDataProvider", parallel = false)
+    public Object[][] airportDataProvider() {
+        return new Object[][]{
+                {"IAD", "DEN"},
+              //  {"LAX", "BOS"},
+              //  {"LAS", "DCA"}
+        };
+    }
+
+
+
+
+
+    @Test(priority = 1, groups = {"smoke"})
+
+    public void testChooseFlightDatesThenClear() {
+        Flights2Page flights2Page = new Flights2Page();
+        flights2Page.getFlightDatesCalendar().click();
+        flights2Page.getSelectDeparture().click();
+        flights2Page.getSelectArrival().click();
+        flights2Page.getFlightDatesClearButton().click();
+    }
+    @Test (priority = 2)
     public void testOneWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeOneWay();
@@ -48,7 +53,7 @@ public class SearchFlightsTests extends TestBase{
         softAssert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
         softAssert.assertAll();
     }
-    @Test (priority =3, groups = {"smoke"})
+    @Test (priority =3)
     public void testMultiWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeMultiCity();

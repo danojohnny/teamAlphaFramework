@@ -28,12 +28,26 @@ public class FlightsPage {
     @FindBy(id = "search_input")
     private WebElement getCityOrAirportSearchInputTo;
 
+    @FindBy(id = "input_departureDate_1")
+    private WebElement datesCalendar;
+
+    @FindBy(xpath = "//a[@aria-label='24 April 2023, Monday']")
+    private WebElement departureDate;
+
+    @FindBy(xpath = "//a[@aria-label='28 April 2023, Friday']")
+    private WebElement arrivalDate;
+
+    @FindBy(xpath = "//* [@class='donebutton']")
+    private WebElement datesDoneButton;
+
     @FindBy(xpath = "//div[ @class='search-result-container']/div/ul/li[1]")
     private WebElement dropdownFirstSelectionFrom;
 
     @FindBy(xpath = "//div[ @class='search-result-container']/div/ul/li[1]")
     private WebElement dropdownFirstSelectionTo;
 
+    @FindBy(id = "btn-book-submit")
+    private WebElement flightBookButton;
     @FindBy(xpath = "//*[@id='selectTripType-desc']/li[1]")
     private WebElement tripTypeRoundTrip;
 
@@ -72,6 +86,17 @@ public class FlightsPage {
         getCityOrAirportSearchInputTo.sendKeys(to);
         dropdownFirstSelectionTo.click();
 
+    }
+
+    public void searchFlightDates(){
+        datesCalendar.click();
+        departureDate.click();
+        arrivalDate.click();
+        datesDoneButton.click();
+        utils.SeleniumUtils.jsClick(flightBookButton);
+        //flightBookButton.click();
+        utils.SeleniumUtils.waitForPresenceOfElementLocated(By.xpath("//span[contains(., 'Outbound')]"), 120);
+       // utils.SeleniumUtils.fluentWait(outboundSearchResultHeader, 60, 2);
     }
 
     public WebElement getFromButton() {
@@ -114,5 +139,13 @@ public class FlightsPage {
     public void selectTripTypeMultiCity() {
         SeleniumUtils.jsClick(tripTypeMultiCityTrip);
 
+    }
+
+    //Flight Search result page
+    @FindBy (xpath = "//span[contains(., 'Outbound')]")
+    private WebElement outboundSearchResultHeader;
+
+    public WebElement getOutboundSearchResultHeader() {
+        return outboundSearchResultHeader;
     }
 }

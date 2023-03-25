@@ -78,7 +78,7 @@ public class VacationDealsTests extends TestBase {
     }
 
 
-    @DataProvider
+    @DataProvider (name = "airportDataProvider", parallel = true)
     public Object[][] airportDataProvider() {
         return new Object[][]{
                 {"BWI"},
