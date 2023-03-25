@@ -18,7 +18,7 @@ public class VacationPage {
     @FindBy(xpath = "/html/body/app-root/app-home/ngc-global-nav/header/div/nav/div/div[2]/ngc-search/div")
     private WebElement topSearchButton;
 
-    @FindBy(xpath = "//div[@class='input-group']")
+    @FindBy(xpath = "//input[@id='search_input']")
     private WebElement searchForTopic;
 
     @FindBy(xpath= "/html/body/modal-container/div/div/ngc-flyout-search/div/div/div/div/div[2]/div[3]/ul/li[1]/a")
@@ -70,12 +70,15 @@ public class VacationPage {
         topSearchButton.click();
     }
 
-    public void searchForTopic() {
-        searchForTopic.sendKeys("Vacation Deals");
-        dropDownFirst.click();
+    //public void searchForTopic() {
+      //  searchForTopic.sendKeys("Vacation Deals");
+       // dropDownFirst.click();
+
+    public void selectSearchTop() {
+        SeleniumUtils.jsClick(searchForTopic);
     }
 
-    public void clickDeltaVacation(){
+        public void clickDeltaVacation(){
         deltaVacationsPage.click();
     }
 

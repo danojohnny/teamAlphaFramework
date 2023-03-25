@@ -20,7 +20,7 @@ public class VacationDealsTests extends TestBase {
    @Test
     public void testSearchForTopic(){
         VacationPage vacationPage = new VacationPage();
-        vacationPage.searchForTopic();
+        vacationPage.selectSearchTop();
     }
 
     @Test
