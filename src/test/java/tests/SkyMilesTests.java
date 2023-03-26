@@ -42,4 +42,12 @@ public class SkyMilesTests extends TestBase {
 
 
     }
+
+    @Test
+    public void navigateToJoinSkyMilesThruSkyMilesTab() {
+        SkyMilesPage skyMilesPage = new SkyMilesPage();
+        skyMilesPage.clickOnSkyMilesTab();
+        skyMilesPage.clickOnJoinSkyMilesThruSkyMilesOnMain();
+        Assert.assertEquals(skyMilesPage.SkyMilesMain().getText(), "Join SkyMiles® | Delta Air Lines");
+}
 }

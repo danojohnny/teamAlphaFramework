@@ -108,7 +108,6 @@ public class SkyMilesPage {
 
 
 
-
     @FindBy(id = "primary-static-link-0")
     private WebElement getJoinSkyMilesThruSkyMilesOnMain;
 
@@ -138,4 +137,13 @@ public class SkyMilesPage {
         return basicInfoAlert;
 
     }
+
+    @FindBy(id="headSectab2")
+    private WebElement getSkyMilesTab;
+
+
+    public void clickOnSkyMilesTab() {
+        getSkyMilesTab.click();
+    }
+
 }
