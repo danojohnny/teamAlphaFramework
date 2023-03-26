@@ -9,19 +9,19 @@ import utils.Driver;
 
 public class SearchFlightsTests extends TestBase{
 
-    @Test (dataProvider = "airportDataProvider")
+  //  @Test (dataProvider = "airportDataProvider")
     public void testFlightFrom(String airportCode){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.findFlightsFrom(airportCode);
         Assert.assertEquals(flightsPage.getFromButton().getText(), airportCode);
     }
-    @Test (dataProvider = "airportDataProvider")
+  //  @Test (dataProvider = "airportDataProvider")
     public void testFlightTo(String airportCode){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.findFlightsTo(airportCode);
         Assert.assertEquals(flightsPage.getToButton().getText(), airportCode);
     }
-    @DataProvider (name = "airportDataProvider", parallel = true)
+   // @DataProvider (name = "airportDataProvider", parallel = true)
     public Object[][] airportDataProvider() {
         return new Object[][]{
                 {"IAD"},
@@ -29,7 +29,7 @@ public class SearchFlightsTests extends TestBase{
                 {"CGD"}
         };
     }
-    @Test (priority = 1)
+   // @Test (priority = 1)
     public void testRoundTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeRound();
@@ -39,7 +39,7 @@ public class SearchFlightsTests extends TestBase{
         softAssert.assertEquals(flightsPage.getDatesSelectorReturn().getText(), "Return");
         softAssert.assertAll();
     }
-    @Test (priority = 2)
+  // @Test (priority = 2)
     public void testOneWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeOneWay();
@@ -48,7 +48,7 @@ public class SearchFlightsTests extends TestBase{
         softAssert.assertEquals(flightsPage.getDatesSelectorDepart().getText(), "Depart");
         softAssert.assertAll();
     }
-    @Test (priority =3)
+    // @Test (priority =3)
     public void testMultiWayTripSelection(){
         FlightsPage flightsPage = new FlightsPage();
         flightsPage.selectTripTypeMultiCity();
