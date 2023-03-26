@@ -9,8 +9,6 @@ import utils.Driver;
 
 public class HomePageTests extends TestBase{
 
-
-
     @Test
     public void checkTitle(){
 

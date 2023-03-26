@@ -16,6 +16,7 @@ public class FlightsPage {
     @FindBy(xpath = "//a[@id='fromAirportName']/span[1]")
     //@FindBy(xpath = "//span[contains(., 'From')]")
     private WebElement fromButton;
+
     @FindBy(xpath = "//a[@id='toAirportName']/span[1]")
     private WebElement toButton;
 

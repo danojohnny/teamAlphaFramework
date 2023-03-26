@@ -13,15 +13,31 @@ public class Flights2Page {
         PageFactory.initElements(Driver.getDriver(), this);
 
     }
-// LOCATORS
+
+    // LOCATORS
+    @FindBy(id = "airports-error")
+    private WebElement invalidSearchErrorMessage;
+
     @FindBy(id = "input_departureDate_1")
     private WebElement flightDatesCalendar;
+
+    public void clickOnCalendar(){
+        flightDatesCalendar.click();
+    }
 
     @FindBy(xpath = "//a[@aria-label='29 March 2023, Wednesday']")
     private WebElement selectDeparture;
 
+    public void clickOnDepartureDate(){
+        selectDeparture.click();
+    }
+
     @FindBy(xpath = "//a[@aria-label='7 April 2023, Friday']")
     private WebElement selectArrival;
+
+    public void clickOnArrivalDate() {
+        selectArrival.click();
+    }
 
     @FindBy(xpath = "//* [@class='donebutton']")
     private WebElement flightDatesDoneButton;
@@ -62,13 +78,21 @@ public class Flights2Page {
     @FindBy(id = "btn-book-submit")
     private WebElement regularBookButton;
 
+    public void clickOnRegularSubmit (){
+        regularBookButton.click();
+    }
+
     @FindBy(id = "adv-search")
     private WebElement advancedSearchTab;
+
+    public void clickOnAdvancedSearch(){
+        advancedSearchTab.click();
+    }
 
     @FindBy(id = "nearbyAirports")
     private WebElement nearbyAirportsTab;
 
-    @FindBy(id="faresFor-val")
+    @FindBy(id = "faresFor-val")
     private WebElement dropdownSeatClass;
 
     @FindBy(id = "ui-list-faresFor0")
@@ -83,6 +107,10 @@ public class Flights2Page {
     @FindBy(id = "ui-list-faresFor3")
     private WebElement firstClass;
 
+    public void clickFirstClass(){
+        firstClass.click();
+    }
+
     @FindBy(id = "ui-list-faresFor4")
     private WebElement deltaPremiumClass;
 
@@ -92,12 +120,18 @@ public class Flights2Page {
     @FindBy(id = "btnSubmit")
     private WebElement advancedBookButton;
 
-
+    public void clickOnAdvancedBookButton(){
+        advancedBookButton.click();
+    }
 
 
 // RETURN methods
+    public WebElement invalidSearchErrorMessage(){
+        return invalidSearchErrorMessage;
+    }
 
     public WebElement getFlightDatesCalendar() {
+
         return flightDatesCalendar;
     }
 
@@ -122,25 +156,24 @@ public class Flights2Page {
     }
 
     public WebElement getRegularBookButton() {
-        return  regularBookButton;
+        return regularBookButton;
     }
 
     public WebElement getAdvancedSearchTab() {
-        return  advancedSearchTab;
+        return advancedSearchTab;
     }
 
     public WebElement getNearbyAirportsTab() {
-        return  nearbyAirportsTab;
+        return nearbyAirportsTab;
     }
 
     public WebElement getDropdownSeatClass() {
-        return  dropdownSeatClass;
+        return dropdownSeatClass;
     }
 
     public WebElement getAdvancedBookButton() {
-        return  advancedBookButton;
+        return advancedBookButton;
     }
-
 
 
     //SELECT FROM LIST methods
@@ -188,7 +221,83 @@ public class Flights2Page {
     public void selectDeltaPremiumClass() {
         SeleniumUtils.jsClick(deltaPremiumClass);
     }
+
     public void selectDeltaOneClass() {
         SeleniumUtils.jsClick(deltaOneClass);
     }
+
+
+
+
+    //SPRINT 2
+
+    @FindBy(xpath = "//a[@id='fromAirportName']/span[1]")
+    private WebElement fromButton;
+
+    @FindBy(xpath = "//a[@id='toAirportName']/span[1]")
+    private WebElement toButton;
+
+    @FindBy(id = "selectTripType-val")
+    private WebElement tripType;
+
+    @FindBy(id = "search_input")
+    private WebElement cityOrAirportFrom;
+
+    @FindBy(id = "search_input")
+    private WebElement cityOrAirportTo;
+
+    @FindBy(xpath = "//div[ @class='search-result-container']/div/ul/li[1]")
+    private WebElement selectFirstAirportFrom;
+
+    @FindBy(xpath = "//div[ @class='search-result-container']/div/ul/li[1]")
+    private WebElement selectFirstAirportTo;
+
+    @FindBy(xpath = "//*[@id='selectTripType-desc']/li[1]")
+    private WebElement typeRoundTrip;
+
+    public WebElement getFromButton() {
+        return fromButton;
+    }
+
+    public WebElement getToButton() {
+        return toButton;
+    }
+
+    public WebElement getTripType() {
+        return tripType;
+    }
+
+
+    public void tripTypeRound() {
+        SeleniumUtils.jsClick(typeRoundTrip);
+
+    }
+
+    public void findFlightsFrom(String from) {
+        fromButton.click();
+        cityOrAirportFrom.sendKeys(from);
+        selectFirstAirportFrom.click();
+
+    }
+
+    public void findFlightsTo(String to) {
+        toButton.click();
+        cityOrAirportTo.sendKeys(to);
+        selectFirstAirportTo.click();
+    }
+
+    public void chooseFlightAndSubmit(){
+        Flights2Page flights2Page = new Flights2Page();
+        flights2Page.tripTypeRound();
+        flights2Page.clickOnCalendar();
+        flights2Page.clickOnDepartureDate();
+        flights2Page.clickOnArrivalDate();
+        flights2Page.selectOnePassenger();
+        flights2Page.clickOnAdvancedSearch();
+        flights2Page.selectFirstClass();
+        flights2Page.getAdvancedBookButton();
+        flights2Page.clickOnAdvancedBookButton();
+    }
+
+
 }
