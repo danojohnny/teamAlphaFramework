@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.Flights2Page;
 import pages.FlightsPage;
@@ -80,6 +81,7 @@ public class SearchFlights2Tests extends TestBase {
         Assert.assertEquals(flights2Page.getDropdownSeatClass().getText(), "First Class");
 
     }
+
     @Test(priority = 8, groups = {"smoke"})
 
     public void testAdvancedSearchFlightClassDeltaOne() {
@@ -90,6 +92,7 @@ public class SearchFlights2Tests extends TestBase {
         flights2Page.selectDeltaOneClass();
         Assert.assertEquals(flights2Page.getDropdownSeatClass().getText(), "Delta One®");
     }
+
     @Test(priority = 9, groups = {"smoke"})
     public void testAdvancedSearchFlightClassEconomy() {
 
@@ -99,7 +102,8 @@ public class SearchFlights2Tests extends TestBase {
         flights2Page.selectBasicEconomyClass();
         Assert.assertEquals(flights2Page.getDropdownSeatClass().getText(), "Basic Economy");
     }
-    @Test(priority = 6, groups = {"smoke"})   // this test must fail because flight details are not selected
+
+    @Test(priority = 6)   // this test must fail because flight details are not selected
 
     public void testAdvancedBookButton() {
 
@@ -110,4 +114,23 @@ public class SearchFlights2Tests extends TestBase {
         flights2Page.getAdvancedBookButton().click();
 
     }
-}
+
+         @DataProvider
+        public Object[][] airportCode() {
+        return new Object[][]{
+                {"MCI", "MCI"}
+        };
+
+        }
+
+        @Test(dataProvider = "airportCode", groups = {"smoke"})
+
+        public void testBusinessFlightWithSameFromAndTo (String airportCode1, String airportCode2){
+            Flights2Page flights2Page = new Flights2Page();
+            flights2Page.findFlightsFrom(airportCode1);
+            flights2Page.findFlightsTo(airportCode2);
+            flights2Page.chooseFlightAndSubmit();
+            Assert.assertEquals(flights2Page.invalidSearchErrorMessage().getText(), "Origin cannot be same as destination");
+        }
+
+    }
