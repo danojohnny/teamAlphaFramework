@@ -20,7 +20,7 @@ public class SearchFlights2Tests extends TestBase {
     }
 
 
-    @Test(priority = 2, groups = {"smoke"})
+    @Test(priority = 2)
 
     public void testChooseFlightDatesThenSubmit() {
         Flights2Page flights2Page = new Flights2Page();
@@ -31,7 +31,7 @@ public class SearchFlights2Tests extends TestBase {
     }
 
 
-    @Test(priority = 3, groups = {"smoke"})
+    @Test(priority = 3)
 
     public void testNumberOfPassengers1() {
         Flights2Page flights2Page = new Flights2Page();
@@ -41,7 +41,7 @@ public class SearchFlights2Tests extends TestBase {
 
     }
 
-    @Test(priority = 4, groups = {"smoke"})
+    @Test(priority = 4)
 
     public void testNumberOfPassengers2() {
         Flights2Page flights2Page = new Flights2Page();
@@ -51,7 +51,7 @@ public class SearchFlights2Tests extends TestBase {
 
     }
 
-    @Test(priority = 5, groups = {"smoke"})
+    @Test(priority = 5)
 
     public void testNumberOfPassengers5() {
         Flights2Page flights2Page = new Flights2Page();
@@ -61,7 +61,7 @@ public class SearchFlights2Tests extends TestBase {
 
     }
 
-    @Test(priority = 6, groups = {"smoke"})
+    @Test(priority = 6)
 
     public void testRegularBookButton() {
 
@@ -70,7 +70,7 @@ public class SearchFlights2Tests extends TestBase {
 
     }
 
-    @Test(priority = 7, groups = {"smoke"})
+    @Test(priority = 7)
 
     public void testAdvancedSearchFlightClassFirst() {
 
@@ -82,7 +82,7 @@ public class SearchFlights2Tests extends TestBase {
 
     }
 
-    @Test(priority = 8, groups = {"smoke"})
+    @Test(priority = 8)
 
     public void testAdvancedSearchFlightClassDeltaOne() {
 
@@ -93,7 +93,8 @@ public class SearchFlights2Tests extends TestBase {
         Assert.assertEquals(flights2Page.getDropdownSeatClass().getText(), "Delta One®");
     }
 
-    @Test(priority = 9, groups = {"smoke"})
+    @Test(priority = 9)
+    
     public void testAdvancedSearchFlightClassEconomy() {
 
         Flights2Page flights2Page = new Flights2Page();
@@ -103,7 +104,8 @@ public class SearchFlights2Tests extends TestBase {
         Assert.assertEquals(flights2Page.getDropdownSeatClass().getText(), "Basic Economy");
     }
 
-    @Test(priority = 6)   // this test must fail because flight details are not selected
+
+    @Test  // this test must fail because flight details are not selected
 
     public void testAdvancedBookButton() {
 
