@@ -8,7 +8,7 @@ import pages.FlightsPage;
 
 public class BaggageTests extends TestBase {
 
-    @Test (dataProvider = "airportDataProvider")
+    @Test (dataProvider = "airportDataProvider", groups = {"smoke"})
     public void calculateBaggageFeesBasicEconomy(String from, String to, String baggageFee) {
         logger.info("Navigating to baggage page");
         BaggagePage baggagePage = new BaggagePage();
@@ -21,7 +21,7 @@ public class BaggageTests extends TestBase {
         Assert.assertEquals(baggagePage.getBaggageFeeLabel().getText(), baggageFee);
     }
 
-    @Test (dataProvider = "airportDataProvider")
+    @Test (dataProvider = "airportDataProvider", groups = {"smoke"})
     public void calculateBaggageFeesMainCabin(String from, String to, String baggageFee) {
         logger.info("Navigating to baggage page");
         BaggagePage baggagePage = new BaggagePage();
@@ -34,7 +34,7 @@ public class BaggageTests extends TestBase {
         Assert.assertEquals(baggagePage.getBaggageFeeLabel().getText(), baggageFee);
     }
 
-    @Test (dataProvider = "airportDataProviderPremium")
+    @Test (dataProvider = "airportDataProviderPremium", groups = {"smoke"})
     public void calculateBaggageFeesDeltaPremiumExperience(String from, String to, String baggageFee) {
         logger.info("Navigating to baggage page");
         BaggagePage baggagePage = new BaggagePage();
@@ -47,7 +47,7 @@ public class BaggageTests extends TestBase {
         Assert.assertEquals(baggagePage.getBaggageFeeLabel().getText(), baggageFee);
     }
 
-    @Test (dataProvider = "airportDataProviderPremium")
+    @Test (dataProvider = "airportDataProviderPremium", groups = {"smoke"})
     public void calculateBaggageFeesFirstClassExperience(String from, String to, String baggageFee) {
         logger.info("Navigating to baggage page");
         BaggagePage baggagePage = new BaggagePage();
@@ -61,7 +61,7 @@ public class BaggageTests extends TestBase {
     }
 
 
-    @Test (dataProvider = "airportDataProvider2Bags")
+    @Test (dataProvider = "airportDataProvider2Bags", groups = {"smoke"})
     public void calculateBaggageFeesBasicEconomy2bags(String from, String to, String baggageFee) {
         logger.info("Navigating to baggage page");
         BaggagePage baggagePage = new BaggagePage();

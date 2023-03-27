@@ -7,7 +7,7 @@ import pages.SkyMilesPage;
 
 public class SkyMilesTests extends TestBase {
 
-    @Test
+    @Test (groups = {"smoke"})
     public void navigateToSkyMilesThruLoginPage() {
         SkyMilesPage skyMilesPage = new SkyMilesPage();
         skyMilesPage.clickOnLoginButton();
@@ -23,7 +23,7 @@ public class SkyMilesTests extends TestBase {
         };
     }
 
-    @Test(dataProvider = "firstAndLastNames")
+    @Test(dataProvider = "firstAndLastNames", groups = {"smoke"})
     public void skyMilesBasicInfoPage(String firstName, String lastName) {
         navigateToSkyMilesThruLoginPage();
         SkyMilesPage skyMilesPage = new SkyMilesPage();
@@ -43,7 +43,7 @@ public class SkyMilesTests extends TestBase {
 
     }
 
-    @Test
+    @Test (groups = {"smoke"})
     public void navigateToJoinSkyMilesThruSkyMilesTab() {
         SkyMilesPage skyMilesPage = new SkyMilesPage();
         skyMilesPage.clickOnSkyMilesTab();
