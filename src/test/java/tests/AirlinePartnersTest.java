@@ -8,51 +8,51 @@ import pages.Flights2Page;
 public class AirlinePartnersTest  extends TestBase {
 
 
-    @Test
+    @Test (groups = {"smoke"})
     public void testAirlinePartnersMenu() {
         AirlinePartnersPage airlinePartnersPage = new AirlinePartnersPage();
         airlinePartnersPage.airlinePartners();
     }
 
-    @Test
+    @Test (groups = {"smoke"})
     public void testAirlinePartnersDropDownMenu() {
         AirlinePartnersPage airlinePartnersPage = new AirlinePartnersPage();
         airlinePartnersPage.airlinePartners();
     }
-    @Test
+    @Test (groups = {"smoke"})
     public void testAirFrance() {
         AirlinePartnersPage airlinePartnersPage = new AirlinePartnersPage();
         airlinePartnersPage.selectAirFrance();
         Assert.assertEquals(airlinePartnersPage.getAirFrancePageTitle().getText(), "Air France");
 
     }
-    @Test
+    @Test (groups = {"smoke"})
     public void testAeroMexico() {
         AirlinePartnersPage airlinePartnersPage = new AirlinePartnersPage();
         airlinePartnersPage.selectAeromexico();
         Assert.assertEquals(airlinePartnersPage.getAeroMexicoPageTitle().getText(), "Aeromexico");
     }
-    @Test
+    @Test (groups = {"smoke"})
     public void testChinaEastern() {
         AirlinePartnersPage airlinePartnersPage = new AirlinePartnersPage();
         airlinePartnersPage.selectChinaEastern();
         Assert.assertEquals(airlinePartnersPage.getChinaEaternPageTitle().getText(), "China Eastern Airlines");
 
     }
-    @Test
+    @Test (groups = {"smoke"})
     public void testKlm() {
         AirlinePartnersPage airlinePartnersPage = new AirlinePartnersPage();
         airlinePartnersPage.selectKLM();
         Assert.assertEquals(airlinePartnersPage.getKlmPageTitle().getText(), "KLM");
 
     }
-    @Test
+    @Test (groups = {"smoke"})
     public void testKoreanAir() {
         AirlinePartnersPage airlinePartnersPage = new AirlinePartnersPage();
         airlinePartnersPage.selectKoreanAir();
         Assert.assertEquals(airlinePartnersPage.getKoreanAirPageTitle().getText(), "Korean Air");
     }
-    @Test
+    @Test (groups = {"smoke"})
     public void testLatam() {
         AirlinePartnersPage airlinePartnersPage = new AirlinePartnersPage();
         airlinePartnersPage.selectLatam();
